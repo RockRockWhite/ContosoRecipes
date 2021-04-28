@@ -118,3 +118,4 @@ C:\Users\White\source\ContosoRecipes\ContosoRecipes\bin\Debug\net5.0\runtimes\wi
 C:\Users\White\source\ContosoRecipes\ContosoRecipes\bin\Debug\net5.0\Microsoft.AspNetCore.JsonPatch.dll
 C:\Users\White\source\ContosoRecipes\ContosoRecipes\bin\Debug\net5.0\Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
 C:\Users\White\source\ContosoRecipes\ContosoRecipes\bin\Debug\net5.0\Newtonsoft.Json.Bson.dll
+C:\Users\White\source\ContosoRecipes\ContosoRecipes\bin\Debug\net5.0\Swashbuckle.AspNetCore.Newtonsoft.dll

@@ -34,16 +34,16 @@ namespace ContosoRecipes
             services.AddSingleton<CookbookDatabaseSettings>(provider =>
                 provider.GetRequiredService<IOptions<CookbookDatabaseSettings>>().Value);
             services.AddSingleton<RecipesService>();
-            
+
             services.AddControllers();
+            // TODO AddSwaggerGenNewtonsoftSupport
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo {Title = "ContosoRecipes", Version = "v1"});
-            });
+            }).AddSwaggerGenNewtonsoftSupport();
 
-            
-
-
+            // TODO UseMemberCasing
+            services.AddControllers().AddNewtonsoftJson(options => options.UseMemberCasing());
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

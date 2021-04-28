@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using ContosoRecipes.Models;
 using ContosoRecipes.Services;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ContosoRecipes.Controllers
@@ -48,18 +49,55 @@ namespace ContosoRecipes.Controllers
             }
         }
 
-        [HttpDelete]
-        public ActionResult DeleteRecipes()
+        // TODO JsonPatchDocument
+        [HttpPut("{id}")]
+        public ActionResult UpdateRecipe(string id, Recipe newRecipe)
         {
-            bool badThingsHappend = false;
-            if (badThingsHappend)
+            var recipe = _recipeService.Get(id);
+
+            if (recipe == null)
             {
-                return BadRequest();
+                return NotFound();
             }
-            else
+
+            _recipeService.Update(id, newRecipe);
+
+            return NoContent();
+        }
+
+
+        // TODO JsonPatchDocument
+        [HttpPatch("{id}")]
+        public ActionResult UpdateRecipe(string id, JsonPatchDocument<Recipe> recipesUpdates)
+        {
+            // TODO await
+            var recipe = _recipeService.Get(id);
+
+            if (recipe == null)
             {
-                return NoContent();
+                return NotFound();
             }
+
+            // TODO ApplyTo
+            recipesUpdates.ApplyTo(recipe);
+            _recipeService.Update(id, recipe);
+
+            return NoContent();
+        }
+
+        [HttpDelete("{id:length(24)}")]
+        public ActionResult DeleteRecipes(string id)
+        {
+            var recipe = _recipeService.Get(id);
+
+            if (recipe == null)
+            {
+                return NotFound();
+            }
+
+            _recipeService.Remove(recipe.Id);
+
+            return NoContent();
         }
     }
 }
